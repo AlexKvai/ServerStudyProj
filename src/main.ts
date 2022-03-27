@@ -1,3 +1,4 @@
+import { IUserController } from './users/users.controller.interface';
 import { IExeptionFilter } from './errors/exception.filter.interface';
 import { TYPES } from './types';
 import { ILogger } from './logger/logger.interface';
@@ -6,6 +7,8 @@ import { App } from './app';
 import { UserController } from './users/users.controller';
 import { ExeptionFilter } from './errors/exeption.filter';
 import { Container, ContainerModule, interfaces } from 'inversify';
+import { IUserService } from './users/users.service.interface';
+import { UserService } from './users/users.service';
 
 // const logger = new LoggerService();
 // const app = new App(
@@ -22,7 +25,8 @@ export interface IBoostrapReturn {
 export const appBindings = new ContainerModule((bind: interfaces.Bind) => {
 	bind<ILogger>(TYPES.ILogger).to(LoggerService);
 	bind<IExeptionFilter>(TYPES.ExeptionFilter).to(ExeptionFilter);
-	bind<UserController>(TYPES.UserController).to(UserController);
+	bind<IUserController>(TYPES.UserController).to(UserController);
+	bind<IUserService>(TYPES.UserService).to(UserService);
 	bind<App>(TYPES.Application).to(App);
 });
 
